@@ -18,12 +18,7 @@ describe 'Instagram Posts' do
 
 		it 'Home page has the ability to add a post' do
 			visit '/posts'
-			click_on "Create a post"
-			expect(current_path).to eq('/posts/new')
-			# attach_file('Image', '../../assets/images/image.jpg')
-			fill_in "Image", with: "Flower"
-			fill_in "Caption", with: "Saw a flower this morning"
-			click_on "Add"
+			add_post("Flower", "Saw a flower this morning")
 			expect(current_path).to eq('/posts')
 			expect(page).to have_content("Saw a flower this morning")
 		end
