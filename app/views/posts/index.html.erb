@@ -1,1 +1,15 @@
+
+
+
+
+
+<%= link_to 'Create a post', new_post_path %>
+
+
+<% if @posts.any? %>
+ 	<% @posts.each do |post| %>
+ 		<%= post.caption %>
+ 	<% end%>
+ <% else %>
 <p>No posts</p>
+ <% end %>

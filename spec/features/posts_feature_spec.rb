@@ -13,11 +13,12 @@ describe 'Instagram Posts' do
 			visit '/posts'
 			click_on "Create a post"
 			expect(current_path).to eq('/posts/new')
-			fill_in
-			fill_in :tags, with: "Makers, Codeschool"
+			# attach_file('Image', '../../assets/images/image.jpg')
+			fill_in "Image", with: "Flower"
+			fill_in "Caption", with: "Saw a flower this morning"
 			click_on "Add"
 			expect(current_path).to eq('/posts')
-			expect(page).to have_content("Makers, Codeschool")
+			expect(page).to have_content("Saw a flower this morning")
 		end
 
 	end
