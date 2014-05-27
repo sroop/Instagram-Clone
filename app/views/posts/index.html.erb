@@ -8,6 +8,7 @@
  	<% @posts.each do |post| %>
  		<%= post.image %>
  		<%= post.caption %>
+ 		<%= link_to "Leave a comment", new_post_comment_path(post) %>
  		0 comments
  	<% end%>
  <% else %>
