@@ -1,13 +1,12 @@
 
 
 
-
-
 <%= link_to 'Create a post', new_post_path %>
 
 
 <% if @posts.any? %>
  	<% @posts.each do |post| %>
+ 		<%= post.image %>
  		<%= post.caption %>
  	<% end%>
  <% else %>
