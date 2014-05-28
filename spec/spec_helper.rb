@@ -7,6 +7,7 @@ require 'capybara/rails'
 include Warden::Test::Helpers
 Warden.test_mode!
 require 'helpers/helper_methods'
+AWS.stub!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
