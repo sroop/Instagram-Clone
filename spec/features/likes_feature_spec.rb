@@ -8,11 +8,20 @@ describe 'Likes' do
 		login_as sroop
 	end
 		
-	it 'a user can like a post' do
+	it 'a user can like a post if logged in' do
 		visit '/posts'
 		add_post("Look at this leaf")
 		click_on 'Like'
 		expect(page).to have_content("sroop@sunar.com likes this")
+	end
+
+	it 'a user can not like a post when logged out' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		logout
+		visit '/posts'
+		expect(current_path).to eq('/posts')
+		expect(page).to have_content("Look at this leaf")
 	end
 
 end

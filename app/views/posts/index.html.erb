@@ -5,21 +5,27 @@
  	<% @posts.each do |post| %>
  		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
  		<%= post.caption %>
- 		<%= link_to "Leave a comment", new_post_comment_path(post) %>
+
+ 
+
  		<h4><%= pluralize post.comments.count, 'comment' %></h4>
 
  		<% if post.user == current_user %>
  			<%= link_to 'Delete', post_path(post), method: :delete %>
  		<% end %>
 
- 		 <%= link_to 'Like', post_likes_path(post), method: :post %>
- 		 	<% post.likes.each do |like| %>
- 		 	<%= like.user.email %> likes this
- 		 <% end %>
+
+ 		<% if current_user %>
+ 				<%= link_to "Leave a comment", new_post_comment_path(post) %>
+	 	 <%= link_to 'Like', post_likes_path(post), method: :post %>
+	 	 	<% post.likes.each do |like| %>
+	 	 		<%= like.user.email %> likes this
+	 	 	<% end %>
+ 	 	<% end %>
 
  		<ul>
 	 		<% post.comments.each do |comment| %>
-	 			<li> <%= comment.comment %> </li>
+	 			<li> <%= comment.comment %> - <%= comment.user.email %> </li>
 	 		<% end %>
  		</ul>
 
