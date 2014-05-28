@@ -9,15 +9,21 @@
  		<h4><%= pluralize post.comments.count, 'comment' %></h4>
 
  		<% if post.user == current_user %>
- 		<%= link_to 'Delete', post_path(post), method: :delete %>
+ 			<%= link_to 'Delete', post_path(post), method: :delete %>
  		<% end %>
 
+ 		 <%= link_to 'Like', post_likes_path(post), method: :post %>
+ 		 	<% post.likes.each do |like| %>
+ 		 	<%= like.user.email %> likes this
+ 		 <% end %>
+
  		<ul>
- 		<% post.comments.each do |comment| %>
- 		<li> <%= comment.comment %> </li>
- 		<% end %>
+	 		<% post.comments.each do |comment| %>
+	 			<li> <%= comment.comment %> </li>
+	 		<% end %>
  		</ul>
+
  	<% end%>
  <% else %>
-<p>No posts</p>
+	<p>No posts</p>
  <% end %>
