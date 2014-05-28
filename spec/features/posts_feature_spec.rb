@@ -29,7 +29,7 @@ describe 'Instagram Posts' do
 		
 		before do
 			sroop = User.create(email: 'sroop@sunar.com', password: '123456789', password_confirmation: '123456789')
-			nico = User.create(email: 'nico@sunar.com', password: '123456789', password_confirmation: '123456789')
+			@nico = User.create(email: 'nico@sunar.com', password: '123456789', password_confirmation: '123456789')
 			login_as sroop
 		end
 
@@ -39,6 +39,16 @@ describe 'Instagram Posts' do
 			click_on 'Delete'
 			expect(current_path).to eq('/posts')
 			expect(page).to_not have_content("Leaf")
+		end
+
+		it 'a post can only be deleted by the user who created the post' do
+			visit '/posts'
+			add_post("Leaf", "Look at this leaf")
+			logout
+			login_as @nico
+			click_on 'Delete'
+			expect(current_path).to eq('/posts')
+			expect(page).to have_content("Leaf")
 		end
 
 	end
