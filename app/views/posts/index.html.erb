@@ -6,9 +6,10 @@
  		<%= post.image %>
  		<%= post.caption %>
  		<%= link_to "Leave a comment", new_post_comment_path(post) %>
- 		<h4><%= pluralize post.comments.count, 'comment' %> </h4>
+ 		<h4><%= pluralize post.comments.count, 'comment' %></h4>
+ 		<%= link_to 'Delete', post_path(post), method: :delete %>
  		<ul>
- 		<% post.comments.each do |comment |%>
+ 		<% post.comments.each do |comment| %>
  		<li> <%= comment.comment %> </li>
  		<% end %>
  		</ul>

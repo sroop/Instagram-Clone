@@ -25,4 +25,22 @@ describe 'Instagram Posts' do
 
 	end
 
+	context 'Lots of posts from multiple users' do
+		
+		before do
+			sroop = User.create(email: 'sroop@sunar.com', password: '123456789', password_confirmation: '123456789')
+			nico = User.create(email: 'nico@sunar.com', password: '123456789', password_confirmation: '123456789')
+			login_as sroop
+		end
+
+		it 'a post can be deleted' do
+			visit '/posts'
+			add_post("Leaf", "Look at this leaf")
+			click_on 'Delete'
+			expect(current_path).to eq('/posts')
+			expect(page).to_not have_content("Leaf")
+		end
+
+	end
+
 end
