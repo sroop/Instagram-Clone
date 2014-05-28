@@ -11,13 +11,18 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		Post.create(params[:post].permit(:image, :caption))
+		@post = Post.new(params[:post].permit(:image, :caption))
+		@post.user = current_user
+		@post.save
 		redirect_to('/posts')
 	end
 
 	def destroy
-		@post = Post.find(params[:id])
+		@post = current_user.posts.find(params[:id])
 		@post.destroy
+	rescue ActiveRecord::RecordNotFound
+		flash[:notice] = "Can't delete!"
+	ensure
 		redirect_to '/posts'
 	end
 
