@@ -3,7 +3,7 @@
 
 <% if @posts.any? %>
  	<% @posts.each do |post| %>
- 		<%= post.image %>
+ 		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
  		<%= post.caption %>
  		<%= link_to "Leave a comment", new_post_comment_path(post) %>
  		<h4><%= pluralize post.comments.count, 'comment' %></h4>

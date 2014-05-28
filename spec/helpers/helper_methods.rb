@@ -1,7 +1,7 @@
-def add_post(image, caption)
+def add_post(caption)
 	click_on "Create a post"
 	expect(current_path).to eq('/posts/new')
-	fill_in "Image", with: image
+	attach_file 'Picture', Rails.root.join('public/images/image.jpg')
 	fill_in "Caption", with: caption 
 	click_on "Add"
 end
