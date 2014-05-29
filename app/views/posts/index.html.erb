@@ -8,7 +8,7 @@
  		<p><%= post.caption %></p>
 
  		<% post.tags.each do |tag| %>
- 			<%= link_to tag.name, '#' %>
+ 			<%= link_to tag.name, tag_path(tag) %>
  		<% end %>
  
 
