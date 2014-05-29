@@ -3,9 +3,13 @@
 <br>
 <% if @posts.any? %>
  	<% @posts.each do |post| %>
+
  		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
  		<p><%= post.caption %></p>
- 		
+
+ 		<% post.tags.each do |tag| %>
+ 			<%= link_to tag.name, '#' %>
+ 		<% end %>
  
 
  		<h5><%= pluralize post.comments.count, 'comment' %></h4>
