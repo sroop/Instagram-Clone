@@ -31,7 +31,7 @@ describe 'Tags' do
 	context 'Filtering posts by tag' do
 
 		before do
-			Post.create(caption: "Another random post")
+			Post.create(caption: "Another random post", tag_name: "#taggage")
 			user = User.create(email: 'sroop@sunar.com', password: '123456789', password_confirmation: '123456789')
 			login_as user
 		end
@@ -52,6 +52,11 @@ describe 'Tags' do
 			expect(page).to_not have_content("Another random post")
 		end
 
+		it 'Tags have their own URL by name, not id' do
+			visit '/posts'
+			click_on('#taggage')
+			expect(current_path).to eq('/tags/taggage')
+		end
 	end
 
 end
