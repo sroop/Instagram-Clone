@@ -21,6 +21,14 @@ describe 'Tags' do
 		end
 
 		it 'For a post with one tag, one tag is displayed' do
+			visit '/posts'
+			click_on "Create a post"
+			expect(current_path).to eq('/posts/new')
+			attach_file 'Picture', Rails.root.join('public/images/image.jpg')
+			fill_in "Caption", with: "Nice flower"
+			fill_in "Tags", with: "nature"
+			click_on "Add"
+			expect(page).to have_content("#nature")
 
 		end
 
