@@ -9,18 +9,7 @@ describe 'Tags' do
 			login_as user
 		end
 
-		it 'For a post with zero tags, no tags are displayed' do
-			visit '/posts'
-			click_on "Create a post"
-			expect(current_path).to eq('/posts/new')
-			attach_file 'Picture', Rails.root.join('public/images/image.jpg')
-			fill_in "Caption", with: "Nice flower"
-			fill_in "Tags", with: ""
-			click_on "Add"
-			expect(page).to have_content("Nice flower")
-		end
-
-		it 'For a post with one tag, one tag is displayed' do
+		it 'A tag is displayed' do
 			visit '/posts'
 			click_on "Create a post"
 			expect(current_path).to eq('/posts/new')
@@ -28,8 +17,7 @@ describe 'Tags' do
 			fill_in "Caption", with: "Nice flower"
 			fill_in "Tags", with: "nature"
 			click_on "Add"
-			expect(page).to have_content("#nature")
-
+			expect(page).to have_link("#nature")
 		end
 
 		it 'For a post with two tags, two tags are displayed' do
