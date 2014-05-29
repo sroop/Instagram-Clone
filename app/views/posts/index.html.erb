@@ -1,14 +1,14 @@
 <%= link_to 'Create a post', new_post_path %>
 
-
+<br>
 <% if @posts.any? %>
  	<% @posts.each do |post| %>
  		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
- 		<%= post.caption %>
+ 		<p><%= post.caption %></p>
 
  
 
- 		<h4><%= pluralize post.comments.count, 'comment' %></h4>
+ 		<h5><%= pluralize post.comments.count, 'comment' %></h4>
 
  		<% if post.user == current_user %>
  			<%= link_to 'Delete', post_path(post), method: :delete %>
