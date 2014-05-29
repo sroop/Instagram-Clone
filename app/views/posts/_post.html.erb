@@ -1,0 +1,28 @@
+<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+		
+<p><%= post.caption %></p>
+
+<% post.tags.each do |tag| %>
+	<%= link_to tag.name, tag_path(tag) %>
+<% end %>
+
+
+<h5><%= pluralize post.comments.count, 'comment' %></h4>
+
+<% if post.user == current_user %>
+	<%= link_to 'Delete', post_path(post), method: :delete %>
+<% end %>
+
+<% if current_user %>
+	<%= link_to "Leave a comment", new_post_comment_path(post) %>
+ 	<%= link_to 'Like', post_likes_path(post), method: :post %>
+ 	<% post.likes.each do |like| %>
+ 	<%= like.user.email %> likes this
+ 	<% end %>
+	<% end %>
+
+	<ul>
+ 		<% post.comments.each do |comment| %>
+ 			<li> <%= comment.comment %> - <%= comment.user.email %> </li>
+ 		<% end %>
+	</ul>
