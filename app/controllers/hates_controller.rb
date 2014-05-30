@@ -10,4 +10,10 @@ class HatesController < ApplicationController
 		redirect_to '/posts'
 	end
 
+	def destroy
+		@hate = Hate.find(params[:id])
+		@hate.destroy
+		redirect_to '/posts'
+	end
+
 end
