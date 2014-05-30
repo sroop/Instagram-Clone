@@ -33,4 +33,13 @@ describe 'Hates' do
 		expect(page).to_not have_content("Hate")
 	end
 
+	it 'a user can unhate their hate' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Hate'
+		expect(page).to have_content("sroop@sunar.com hates this")
+		expect(page).to_not have_content("Hate")
+		expect(page).to have_content("Unhate")
+	end
+
 end
