@@ -29,6 +29,13 @@
 		<li><%= like.user.email %> likes this </li>
 	<% end %>
 </ul>
+
+<ul>
+	<% post.hates.each do |hate| %>
+		<li><%= hate.user.email %> hates this </li>
+	<% end %>
+</ul>
+
 <ul>
 	<% post.comments.each do |comment| %>
 		<li> <%= comment.comment %> - <%= comment.user.email %> </li>
