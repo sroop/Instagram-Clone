@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
 	has_many :comments
 	belongs_to :user
 	has_many :likes
+  has_many :hates
 	has_and_belongs_to_many :tags
 
 	has_attached_file :picture, :styles => { :medium => "300x300>" }, storage: :s3, s3_credentials: {
