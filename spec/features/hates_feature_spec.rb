@@ -16,4 +16,21 @@ describe 'Hates' do
 		expect(page).to have_content("sroop@sunar.com hates this")
 	end
 
+	it 'a user can not hate a post when logged out' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		logout
+		visit '/posts'
+		expect(current_path).to eq('/posts')
+		expect(page).to_not have_content("Hate")
+	end
+
+	it 'a user can only hate one specific post one time' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Hate'
+		expect(page).to have_content("sroop@sunar.com hates this")
+		expect(page).to_not have_content("Hate")
+	end
+
 end
