@@ -24,4 +24,13 @@ describe 'Likes' do
 		expect(page).to have_content("Look at this leaf")
 	end
 
+	it 'a user can only like one specific post once' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Like'
+		expect(page).to have_content("sroop@sunar.com likes this")
+		click_on 'Like'
+		expect(page).to_not have_content("sroop@sunar.com likes this sroop@sunar.com likes this")
+	end
+
 end
