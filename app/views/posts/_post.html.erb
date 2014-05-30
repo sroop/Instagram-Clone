@@ -15,14 +15,23 @@
 
 <% if current_user %>
 	<%= link_to "Leave a comment", new_post_comment_path(post) %>
- 	<%= link_to 'Like', post_likes_path(post), method: :post %>
- 	<% post.likes.each do |like| %>
- 	<%= like.user.email %> likes this
- 	<% end %>
-	<% end %>
 
-	<ul>
- 		<% post.comments.each do |comment| %>
- 			<li> <%= comment.comment %> - <%= comment.user.email %> </li>
- 		<% end %>
-	</ul>
+ 	<%= link_to 'Like', post_likes_path(post), method: :post %>
+ 	
+ 	<% post.likes.each do |like| %>
+
+	 	<% if like.user == current_user %>
+	 		<%= link_to 'Unlike', post_like_path(post, like), method: :delete %>
+	 	<% end %>
+
+	 	<%= like.user.email %> likes this
+
+ 	<% end %>
+
+<% end %>
+
+<ul>
+	<% post.comments.each do |comment| %>
+		<li> <%= comment.comment %> - <%= comment.user.email %> </li>
+	<% end %>
+</ul>

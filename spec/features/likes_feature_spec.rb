@@ -33,4 +33,26 @@ describe 'Likes' do
 		expect(page).to_not have_content("sroop@sunar.com likes this sroop@sunar.com likes this")
 	end
 
+	it 'a user can unlike a liked post' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Like'
+		expect(page).to have_content("sroop@sunar.com likes this")
+		click_on 'Unlike'
+		expect(page).to_not have_content("sroop@sunar.com likes this")
+	end
+
+
+	it 'a user cannot unlike a like from another user' do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Like'
+		expect(page).to have_content("sroop@sunar.com likes this")
+		logout
+		login_as @nico
+		click_on 'Unlike'
+		expect(page).to have_content("sroop@sunar.com likes this")
+		expect(page).to have_content("Thats not yours to unlike!")
+	end
+
 end
