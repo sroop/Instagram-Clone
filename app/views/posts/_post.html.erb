@@ -22,7 +22,9 @@
  		<%= link_to 'Like', post_likes_path(post), method: :post %>
  	<% end %>
 
- 	<% if !user_hates? post %>
+ 	<% if user_hates? post %>
+	<%= link_to 'Unhate', post_hate_path(post, user_hate_for(post)), method: :delete %>
+ 	<% else %>
  		<%= link_to 'Hate', post_hates_path(post), method: :post %>
 	<% end %>
 

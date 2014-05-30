@@ -40,6 +40,8 @@ describe 'Hates' do
 		expect(page).to have_content("sroop@sunar.com hates this")
 		expect(page).to_not have_content("Hate")
 		expect(page).to have_content("Unhate")
+		click_on 'Unhate'
+		expect(page).to_not have_content("sroop@sunar.com hates this")
 	end
 
 end
