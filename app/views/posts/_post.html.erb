@@ -13,23 +13,21 @@
 	<%= link_to 'Delete', post_path(post), method: :delete %>
 <% end %>
 
-<% if current_user %>
+<% if user_signed_in? %>
 	<%= link_to "Leave a comment", new_post_comment_path(post) %>
 
- 	<%= link_to 'Like', post_likes_path(post), method: :post %>
- 	
- 	<% post.likes.each do |like| %>
-
-	 	<% if like.user == current_user %>
-	 		<%= link_to 'Unlike', post_like_path(post, like), method: :delete %>
-	 	<% end %>
-
-	 	<%= like.user.email %> likes this
-
+	<% if user_likes? post %>
+		<%= link_to 'Unlike', post_like_path(post, user_like_for(post)), method: :delete %>
+	<% else %>
+ 		<%= link_to 'Like', post_likes_path(post), method: :post %>
  	<% end %>
-
 <% end %>
 
+<ul>
+	<% post.likes.each do |like| %>
+		<li><%= like.user.email %> likes this </li>
+	<% end %>
+</ul>
 <ul>
 	<% post.comments.each do |comment| %>
 		<li> <%= comment.comment %> - <%= comment.user.email %> </li>
