@@ -11,8 +11,11 @@ class HatesController < ApplicationController
 	end
 
 	def destroy
-		@hate = Hate.find(params[:id])
+		@hate = current_user.hates.find(params[:id])
 		@hate.destroy
+	rescue ActiveRecord::RecordNotFound
+		flash[:notice] = "Thats not yours to unhate!"
+	ensure
 		redirect_to '/posts'
 	end
 
