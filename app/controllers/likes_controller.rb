@@ -10,7 +10,9 @@ class LikesController < ApplicationController
 		@like = @post.likes.new
 		@like.user = current_user
 		@like.save
-		redirect_to '/posts'
+		# redirect_to '/posts'
+
+		render json: @like
 	end
 
 	def destroy

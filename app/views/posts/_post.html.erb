@@ -30,7 +30,7 @@
 		<% if user_likes? post %>
 			<%= link_to 'Unlike', post_like_path(post, user_like_for(post)), method: :delete %>
 		<% else %>
-	 		<%= link_to 'Like', post_likes_path(post), method: :post %>
+	 		<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link" %>
 	 	<% end %>
 
 	 	<% if user_hates? post %>
