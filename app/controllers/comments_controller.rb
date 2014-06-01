@@ -6,11 +6,19 @@ class CommentsController < ApplicationController
   end
 
   def create
-	@post = Post.find(params[:post_id])
-	@comment = @post.comments.new(params[:comment].permit(:comment))
-	@comment.user = current_user
-	@comment.save
-	redirect_to '/posts'
+  	@post = Post.find(params[:post_id])
+  	@comment = @post.comments.new(params[:comment].permit(:comment))
+  	@comment.user = current_user
+  	@comment.save
+    # redirect_to '/posts'
+
+    render json: @comment
+
+    # respond_to do |format|
+    #    format.html{ redirect_to '/posts' }
+    #    format.json{ render json: comment }
+    # end
+   
   end
 
 end
