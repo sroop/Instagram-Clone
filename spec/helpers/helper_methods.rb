@@ -7,7 +7,7 @@ def add_post(caption)
 end
 
 def add_comment(comment)
-	click_on "Leave a comment"
+	# click_on "Leave a comment"
 	fill_in "Comment", with: comment
 	click_on "Add"
 end

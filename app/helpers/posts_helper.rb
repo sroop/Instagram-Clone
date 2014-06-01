@@ -4,7 +4,7 @@ module PostsHelper
 	end
 
 	def user_like_for(post)
-		current_user.likes.first{ |l| l.post == post }
+		current_user.likes.select{ |l| l.post == post }.first
 	end
 
 	def user_hates?(post)
@@ -12,6 +12,6 @@ module PostsHelper
 	end
 
 	def user_hate_for(post)
-		current_user.hates.first{ |h| h.post == post }
+		current_user.hates.select{ |h| h.post == post }.first
 	end
 end
