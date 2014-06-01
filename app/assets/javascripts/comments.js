@@ -6,7 +6,10 @@ $(document).ready(function() {
 		$.post($(this).attr('action'), $(this).serialize(), function(response) {
 			var template = $('#ajax-render-comments').html();
 				var rendered = Mustache.render(template, response);
-				$('.comment-list').append(rendered);
+				var targetId = response.post_id;
+				var currentPost = $('.post-parent-container[data-id=' + targetId + ']');
+				currentPost.find('ul[class="comment-list"]').prepend(rendered);
+				// $('.comment-list').append(rendered);
 		});
 	})
 })

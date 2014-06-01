@@ -1,59 +1,62 @@
-<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+<div class="post-parent-container" data-id="<%= post.id %>">
+
+	<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+			
+	<p><%= post.caption %></p>
+
+	<% post.tags.each do |tag| %>
+		<%= link_to tag.name, tag_path(tag) %>
+	<% end %>
+
+
+	<h5><%= pluralize post.comments.count, 'comment' %></h4>
+
+	<% if post.user == current_user %>
+		<%= link_to 'Delete', post_path(post), method: :delete %>
+	<% end %>
+
+	<% if user_signed_in? %>
+		<%= link_to "Leave a comment", new_post_comment_path(post) %>
+
+		<%= form_for [post, @comment] do |f| %>
 		
-<p><%= post.caption %></p>
+		<%= f.label :comment %>
+		<%= f.text_field :comment %>
 
-<% post.tags.each do |tag| %>
-	<%= link_to tag.name, tag_path(tag) %>
-<% end %>
+		<%= f.submit 'Add', :class => 'create-comment-btn' %>
 
+	 	<% end %>
 
-<h5><%= pluralize post.comments.count, 'comment' %></h4>
+		<% if user_likes? post %>
+			<%= link_to 'Unlike', post_like_path(post, user_like_for(post)), method: :delete %>
+		<% else %>
+	 		<%= link_to 'Like', post_likes_path(post), method: :post %>
+	 	<% end %>
 
-<% if post.user == current_user %>
-	<%= link_to 'Delete', post_path(post), method: :delete %>
-<% end %>
+	 	<% if user_hates? post %>
+			<%= link_to 'Unhate', post_hate_path(post, user_hate_for(post)), method: :delete %>
+	 	<% else %>
+	 		<%= link_to 'Hate', post_hates_path(post), method: :post %>
+		<% end %>
 
-<% if user_signed_in? %>
-	<%= link_to "Leave a comment", new_post_comment_path(post) %>
-
-	<%= form_for [post, @comment] do |f| %>
-	
-	<%= f.label :comment %>
-	<%= f.text_field :comment %>
-
-	<%= f.submit 'Add', :class => 'create-comment-btn' %>
-
- 	<% end %>
-
-	<% if user_likes? post %>
-		<%= link_to 'Unlike', post_like_path(post, user_like_for(post)), method: :delete %>
-	<% else %>
- 		<%= link_to 'Like', post_likes_path(post), method: :post %>
- 	<% end %>
-
- 	<% if user_hates? post %>
-		<%= link_to 'Unhate', post_hate_path(post, user_hate_for(post)), method: :delete %>
- 	<% else %>
- 		<%= link_to 'Hate', post_hates_path(post), method: :post %>
 	<% end %>
 
-<% end %>
+	<ul>
+		<% post.likes.each do |like| %>
+			<li><%= like.user.email %> likes this </li>
+		<% end %>
+	</ul>
 
-<ul>
-	<% post.likes.each do |like| %>
-		<li><%= like.user.email %> likes this </li>
-	<% end %>
-</ul>
+	<ul>
+		<% post.hates.each do |hate| %>
+			<li><%= hate.user.email %> hates this </li>
+		<% end %>
+	</ul>
 
-<ul>
-	<% post.hates.each do |hate| %>
-		<li><%= hate.user.email %> hates this </li>
-	<% end %>
-</ul>
+	<ul class="comment-list">
+		<% post.comments.each do |comment| %>
+			<li> <%= comment.comment %> - <%= comment.user.email %> </li>
+		<% end %>
+	</ul>
 
-
-<ul class="comment-list">
-	<% post.comments.each do |comment| %>
-		<li> <%= comment.comment %> - <%= comment.user.email %> </li>
-	<% end %>
-</ul>
+</div>
