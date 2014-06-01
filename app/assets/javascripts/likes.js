@@ -4,8 +4,9 @@ $(document).ready(function() {
 		
 
 		$.post($(this).attr('href'), $(this).serialize(), function(response) {
-			console.log(response);
-
+			var template = $('#ajax-render-likes').html();
+			var rendered = Mustache.render(template, response);
+			$('.like-list').append(rendered);
 		})
 
 	return false;

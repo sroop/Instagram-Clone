@@ -12,7 +12,8 @@ class LikesController < ApplicationController
 		@like.save
 		# redirect_to '/posts'
 
-		render json: @like
+		# render json: @like
+		render 'create', content_type: :json
 	end
 
 	def destroy
