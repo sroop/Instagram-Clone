@@ -8,11 +8,20 @@
       </div>
     </div>
 
+<template id="ajax-render-comments">
+
+  <li> {{ comment }} - {{ email }} </li>
+
+</template>
 
 <%= link_to 'Create a post', new_post_path %>
 
+<div class="testing">
+</div>
+
+
 <% if @posts.any? %>
 	<%= render @posts %>
- <% else %>
+<% else %>
 	<p>No posts</p>
- <% end %>
+<% end %>

@@ -11,8 +11,9 @@ class CommentsController < ApplicationController
   	@comment.user = current_user
   	@comment.save
     # redirect_to '/posts'
-
-    render json: @comment
+    render 'create', content_type: :json
+    
+    # render json: @comment
 
     # respond_to do |format|
     #    format.html{ redirect_to '/posts' }
