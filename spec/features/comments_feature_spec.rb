@@ -18,7 +18,6 @@ describe 'Instagram Comments' do
 		it 'A comment can be added to a post', js: true do
 			visit '/posts'
 			add_comment("beautiful photo!")
-			expect(current_path).to eq('/posts')
 			expect(page).to have_content("beautiful photo!")
 			expect(page).to have_content("1 comment")
 		end

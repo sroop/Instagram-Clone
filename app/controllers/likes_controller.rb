@@ -9,9 +9,8 @@ class LikesController < ApplicationController
 		@post = Post.find(params[:post_id])
 		@like = @post.likes.new
 		@like.user = current_user
-		@like.save
+		@like.save!
 		# redirect_to '/posts'
-
 		# render json: @like
 		render 'create', content_type: :json
 	end

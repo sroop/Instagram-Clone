@@ -1,13 +1,14 @@
 <div class="post-parent-container" data-id="<%= post.id %>">
 
-	<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+	<% if post.picture.exists? %>
+		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+	<% end %>
 			
 	<p><%= post.caption %></p>
 
 	<% post.tags.each do |tag| %>
 		<%= link_to tag.name, tag_path(tag) %>
 	<% end %>
-
 
 	<h5><%= pluralize post.comments.count, 'comment' %></h4>
 
