@@ -1,4 +1,4 @@
-<div class="post-parent-container <%= 'liked' if user_likes?(post) %>" data-id="<%= post.id %>">
+<div class="post-parent-container <%= 'liked' if user_likes?(post) %> <%= 'hated' if user_hates?(post) %>" data-id="<%= post.id %>">
 
 	<% if post.picture.exists? %>
 		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
@@ -33,11 +33,12 @@
 
 	 	<h5 class="like-count"><%= pluralize post.likes.count, 'like' %></h5>
 
-	 	<% if user_hates? post %>
-			<%= link_to 'Unhate', post_hate_path(post, user_hate_for(post)), method: :delete %>
-	 	<% else %>
-	 		<%= link_to 'Hate', post_hates_path(post), method: :post %>
-		<% end %>
+
+		<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link" %>
+	 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link" %>
+
+	 	<h5 class="hate-count"><%= pluralize post.hates.count, 'hate' %></h5>
+
 
 	<% end %>
 
@@ -47,7 +48,7 @@
 		<% end %>
 	</ul>
 
-	<ul>
+	<ul class="hate-list">
 		<% post.hates.each do |hate| %>
 			<li><%= hate.user.email %> hates this </li>
 		<% end %>
