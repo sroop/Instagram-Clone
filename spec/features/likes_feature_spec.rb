@@ -8,20 +8,11 @@ describe 'Likes' do
 		login_as sroop
 	end
 		
-	it 'a user can like a post if logged in' do
+	it 'a user can like a post if logged in', js: true do
 		visit '/posts'
 		add_post("Look at this leaf")
 		click_on 'Like'
 		expect(page).to have_content("sroop@sunar.com likes this")
-	end
-
-	it 'a user can not like a post when logged out' do
-		visit '/posts'
-		add_post("Look at this leaf")
-		logout
-		visit '/posts'
-		expect(current_path).to eq('/posts')
-		expect(page).to have_content("Look at this leaf")
 	end
 
 	it 'a user can only like one specific post once' do
@@ -32,7 +23,7 @@ describe 'Likes' do
 		expect(page).to_not have_content("Like")
 	end
 
-	it 'a user can unlike a liked post' do
+	it 'a user can unlike a liked post', js: true do
 		visit '/posts'
 		add_post("Look at this leaf")
 		click_on 'Like'
@@ -42,7 +33,7 @@ describe 'Likes' do
 	end
 
 
-	it 'a user cannot unlike a like from another user' do
+	it 'a user cannot unlike a like from another user', js:true do
 		visit '/posts'
 		add_post("Look at this leaf")
 		click_on 'Like'
