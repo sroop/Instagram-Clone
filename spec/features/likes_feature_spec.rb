@@ -8,20 +8,20 @@ describe 'Likes' do
 		login_as sroop
 	end
 		
-	# it 'a user can like a post if logged in', js: true do
-	# 	visit '/posts'
-	# 	add_post("Look at this leaf")
-	# 	click_on 'Like'
-	# 	expect(page).to have_content("sroop@sunar.com likes this")
-	# end
+	it 'a user can like a post if logged in', js: true do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Like'
+		expect(page).to have_content("sroop@sunar.com likes this")
+	end
 
-	# it 'a user can only like one specific post once' do
-	# 	visit '/posts'
-	# 	add_post("Look at this leaf")
-	# 	click_on 'Like'
-	# 	expect(page).to have_content("sroop@sunar.com likes this")
-	# 	expect(page).to_not have_content("Like")
-	# end
+	it 'a user can only like one specific post once', js: true do
+		visit '/posts'
+		add_post("Look at this leaf")
+		click_on 'Like'
+		expect(page).to have_content("sroop@sunar.com likes this")
+		expect(page).to_not have_content("Like")
+	end
 
 	# it 'a user can unlike a liked post', js: true do
 	# 	visit '/posts'

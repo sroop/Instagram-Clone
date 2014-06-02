@@ -12,18 +12,20 @@ class LikesController < ApplicationController
 		@like.save!
 		# redirect_to '/posts'
 		# render json: @like
-		WebsocketRails[:likes].trigger 'new', { new_like_count: @post.likes.count, post_id: @post_id }
-		# render 'create', content_type: :json
+		# WebsocketRails[:likes].trigger 'new', { new_like_count: @post.likes.count, post_id: @post_id }
+		render 'create', content_type: :json
 	end
 
 	def destroy
-		@like = current_user.likes.find(params[:id])
+		@like = current_user.likes.find_by(post_id: params[:post_id])
+		@post = @like.post
 		# @like = Like.find(params[:id])
 		@like.destroy!
 	rescue ActiveRecord::RecordNotFound
 		flash[:notice] = "Thats not yours to unlike!"
 	ensure
-		redirect_to '/posts'
+		# redirect_to '/posts'
+		render 'destroy', content_type: :json
 	end
 
 end
