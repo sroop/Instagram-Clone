@@ -10,7 +10,7 @@
 		<%= link_to tag.name, tag_path(tag) %>
 	<% end %>
 
-	<h5><%= pluralize post.comments.count, 'comment' %></h4>
+	<h5 class="comment-count"><%= pluralize post.comments.count, 'comment' %></h5>
 
 	<% if post.user == current_user %>
 		<%= link_to 'Delete', post_path(post), method: :delete %>
@@ -33,6 +33,7 @@
 		<% else %>
 	 		<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link" %>
 	 	<% end %>
+	 	<h5 class="like-count"><%= pluralize post.likes.count, 'like' %></h5>
 
 	 	<% if user_hates? post %>
 			<%= link_to 'Unhate', post_hate_path(post, user_hate_for(post)), method: :delete %>

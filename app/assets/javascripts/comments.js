@@ -10,7 +10,7 @@ $(document).ready(function() {
 				var currentPost = $('.post-parent-container[data-id=' + targetId + ']');
 				currentPost.find('ul[class="comment-list"]').prepend(rendered);
 				// $('.comment-list').append(rendered);
-				currentPost.find('h5').text(response.comment_count);
+				currentPost.find('h5[class="comment-count"]').text(response.comment_count);
 		});
 	})
 })

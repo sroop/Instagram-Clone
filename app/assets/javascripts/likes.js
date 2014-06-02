@@ -9,6 +9,7 @@ $(document).ready(function() {
 			var targetId = response.post_id;
 			var currentPost = $('.post-parent-container[data-id=' + targetId + ']');
 			currentPost.find('ul[class="like-list"]').prepend(rendered);
+			currentPost.find('h5[class="like-count"]').text(response.like_count);
 			// $('.like-list').append(rendered);
 		})
 

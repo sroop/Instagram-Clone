@@ -12,7 +12,8 @@ class LikesController < ApplicationController
 		@like.save!
 		# redirect_to '/posts'
 		# render json: @like
-		render 'create', content_type: :json
+		WebsocketRails[:likes].trigger 'new', { new_like_count: @post.likes.count, post_id: @post_id }
+		# render 'create', content_type: :json
 	end
 
 	def destroy
