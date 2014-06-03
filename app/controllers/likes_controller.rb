@@ -22,7 +22,6 @@ class LikesController < ApplicationController
 	def destroy
 		@like = current_user.likes.find_by(post_id: params[:post_id])
 		@post = Post.find(params[:post_id])
-		# @like = Like.find(params[:id])
 		@like.destroy! if @like
 	rescue ActiveRecord::RecordNotFound
 		flash[:notice] = "Thats not yours to unlike!"

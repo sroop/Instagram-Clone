@@ -39,18 +39,17 @@
 
 	 	<h5 class="hate-count"><%= pluralize post.hates.count, 'hate' %></h5>
 
-
 	<% end %>
 
 	<ul class="like-list">
 		<% post.likes.each do |like| %>
-			<li><%= like.user.email %> likes this </li>
+			<li data-id="<%= like.id %>"><%= like.user.email %> likes this </li>
 		<% end %>
 	</ul>
 
 	<ul class="hate-list">
 		<% post.hates.each do |hate| %>
-			<li><%= hate.user.email %> hates this </li>
+			<li data-id="<%= hate.id %>"><%= hate.user.email %> hates this </li>
 		<% end %>
 	</ul>
 
