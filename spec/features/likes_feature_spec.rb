@@ -32,7 +32,6 @@ describe 'Likes' do
 		expect(page).to_not have_content("sroop@sunar.com likes this")
 	end
 
-
 	it 'a user cannot unlike a like from another user', js:true do
 		login_as @sroop
 		visit '/posts'

@@ -1,10 +1,19 @@
 
 <div class="col-md-4">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Panel title</h3>
+  </div>
+  <div class="panel-body">
+  
 	<div class="post-parent-container <%= 'liked' if user_likes?(post) %> <%= 'hated' if user_hates?(post) %>" data-id="<%= post.id %>">
 
-		<% if post.picture.exists? %>
-			<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
-		<% end %>
+		<div class="post-picture">
+			<% if post.picture.exists? %>
+				<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+			<% end %>
+		</div>
 				
 		<p><%= post.caption %></p>
 
@@ -62,5 +71,10 @@
 		</ul>
 
 	</div>
+
+  </div>
 </div>
+
+</div>
+
 
