@@ -30,8 +30,10 @@
 </div>
 
 
-<% if @posts.any? %>
-	<%= render @posts %>
-<% else %>
-	<p>No posts</p>
-<% end %>
+<div class="row">
+  <% if @posts.any? %>
+  	<%= render @posts %>
+  <% else %>
+  	<p>No posts</p>
+  <% end %>
+</div>

@@ -1,62 +1,66 @@
-<div class="post-parent-container <%= 'liked' if user_likes?(post) %> <%= 'hated' if user_hates?(post) %>" data-id="<%= post.id %>">
 
-	<% if post.picture.exists? %>
-		<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
-	<% end %>
+<div class="col-md-4">
+	<div class="post-parent-container <%= 'liked' if user_likes?(post) %> <%= 'hated' if user_hates?(post) %>" data-id="<%= post.id %>">
+
+		<% if post.picture.exists? %>
+			<%= image_tag post.picture.url(:medium), class: 'uploaded-pic' %>
+		<% end %>
+				
+		<p><%= post.caption %></p>
+
+		<% post.tags.each do |tag| %>
+			<%= link_to tag.name, tag_path(tag) %>
+		<% end %>
+
+		<h5 class="comment-count"><%= pluralize post.comments.count, 'comment' %></h5>
+
+		<% if post.user == current_user %>
+			<%= link_to 'Delete', post_path(post), method: :delete %>
+		<% end %>
+
+		<% if user_signed_in? %>
+			<%= link_to "Leave a comment", new_post_comment_path(post) %>
+
+			<%= form_for [post, @comment] do |f| %>
 			
-	<p><%= post.caption %></p>
+			<%= f.label :comment %>
+			<%= f.text_field :comment %>
 
-	<% post.tags.each do |tag| %>
-		<%= link_to tag.name, tag_path(tag) %>
-	<% end %>
+			<%= f.submit 'Add', :class => 'create-comment-btn' %>
 
-	<h5 class="comment-count"><%= pluralize post.comments.count, 'comment' %></h5>
+		 	<% end %>
 
-	<% if post.user == current_user %>
-		<%= link_to 'Delete', post_path(post), method: :delete %>
-	<% end %>
+			<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link" %>
+			<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link" %>
 
-	<% if user_signed_in? %>
-		<%= link_to "Leave a comment", new_post_comment_path(post) %>
-
-		<%= form_for [post, @comment] do |f| %>
-		
-		<%= f.label :comment %>
-		<%= f.text_field :comment %>
-
-		<%= f.submit 'Add', :class => 'create-comment-btn' %>
-
-	 	<% end %>
-
-		<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link" %>
-		<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link" %>
-
-	 	<h5 class="like-count"><%= pluralize post.likes.count, 'like' %></h5>
+		 	<h5 class="like-count"><%= pluralize post.likes.count, 'like' %></h5>
 
 
-		<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link" %>
-	 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link" %>
+			<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link" %>
+		 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link" %>
 
-	 	<h5 class="hate-count"><%= pluralize post.hates.count, 'hate' %></h5>
+		 	<h5 class="hate-count"><%= pluralize post.hates.count, 'hate' %></h5>
 
-	<% end %>
-
-	<ul class="like-list">
-		<% post.likes.each do |like| %>
-			<li data-id="<%= like.id %>"><%= like.user.email %> likes this </li>
 		<% end %>
-	</ul>
 
-	<ul class="hate-list">
-		<% post.hates.each do |hate| %>
-			<li data-id="<%= hate.id %>"><%= hate.user.email %> hates this </li>
-		<% end %>
-	</ul>
+		<ul class="like-list">
+			<% post.likes.each do |like| %>
+				<li data-id="<%= like.id %>"><%= like.user.email %> likes this </li>
+			<% end %>
+		</ul>
 
-	<ul class="comment-list">
-		<% post.comments.each do |comment| %>
-			<li> <%= comment.comment %> - <%= comment.user.email %> </li>
-		<% end %>
-	</ul>
+		<ul class="hate-list">
+			<% post.hates.each do |hate| %>
+				<li data-id="<%= hate.id %>"><%= hate.user.email %> hates this </li>
+			<% end %>
+		</ul>
 
+		<ul class="comment-list">
+			<% post.comments.each do |comment| %>
+				<li> <%= comment.comment %> - <%= comment.user.email %> </li>
+			<% end %>
+		</ul>
+
+	</div>
 </div>
+
