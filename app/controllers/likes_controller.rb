@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+	before_action :authenticate_user!
 
 	def index
 		@likes = Like.all
@@ -14,13 +15,15 @@ class LikesController < ApplicationController
 		# render json: @like
 		# WebsocketRails[:likes].trigger 'new', { new_like_count: @post.likes.count, post_id: @post_id }
 		render 'create', content_type: :json
+	rescue ActiveRecord::RecordInvalid
+		render json: { error: 'Cannot like' }, status: 422
 	end
 
 	def destroy
 		@like = current_user.likes.find_by(post_id: params[:post_id])
-		@post = @like.post
+		@post = Post.find(params[:post_id])
 		# @like = Like.find(params[:id])
-		@like.destroy!
+		@like.destroy! if @like
 	rescue ActiveRecord::RecordNotFound
 		flash[:notice] = "Thats not yours to unlike!"
 	ensure

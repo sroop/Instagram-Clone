@@ -14,6 +14,8 @@ $(document).ready(function() {
 			currentPost.toggleClass('liked');
 			// currentPost.find('.like-link').replaceWith('.unlike-link');
 			// $('.like-list').append(rendered);
+		}).error(function(resp){
+			alert(resp.responseJSON.error)
 		});
 	return false;
 	});
@@ -26,7 +28,8 @@ $(document).ready(function() {
 			var rendered = Mustache.render(template, response);
 			var targetId = response.post_id;
 			var currentPost = $('.post-parent-container[data-id=' + targetId + ']');
-			currentPost.find('ul[class="like-list"]').prepend(rendered);
+			currentPost.find('ul[class="like-list"]').html(rendered);
+			currentPost.find('ul[class="like-list"]').html(null);
 			currentPost.find('h5[class="like-count"]').text(response.like_count);
 
 			currentPost.toggleClass('liked');

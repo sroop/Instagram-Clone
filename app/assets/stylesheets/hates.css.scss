@@ -1,3 +1,16 @@
-// Place all the styles related to the hates controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.hated {
+	.unhate-link {
+		display: inline;
+	}
+
+	.hate-link {
+		display: none;
+	}
+}
+
+/* hate refers to an additional class that exists when the like button is displayed */
+
+
+.unhate-link {
+	display: none;
+}

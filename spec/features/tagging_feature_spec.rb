@@ -5,11 +5,12 @@ describe 'Tags' do
 	context 'Displaying tags on the home page' do
 
 		before do
-			user = User.create(email: 'sroop@sunar.com', password: '123456789', password_confirmation: '123456789')
-			login_as user
+			@user = User.create(email: 'sroop@sunar.com', password: '123456789', password_confirmation: '123456789')
+			login_as @user
 		end
 
 		it 'A tag is displayed' do
+			login_as @user
 			visit '/posts'
 			click_on "Create a post"
 			expect(current_path).to eq('/posts/new')
