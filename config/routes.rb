@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :comments
     resources :likes
     resources :hates
+    resource :map
   end
 
   resources :tags

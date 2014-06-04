@@ -55,4 +55,50 @@ describe 'Instagram Posts' do
 
 	end
 
+	context 'Geo-coding' do
+
+		before do
+			sroop = User.create(email: 'sroop@sunar.com', password: '123456789', password_confirmation: '123456789')
+			login_as sroop
+		end
+
+		it 'a post has a link to a map' do
+			visit '/posts'
+			click_on "Create a post"
+			attach_file 'Picture', Rails.root.join('public/images/image.jpg')
+			fill_in "Caption", with: "nice picture"
+			fill_in "Address", with: "25 City Road, London"
+			click_on "Add"
+			expect(current_path).to eq('/posts')
+			expect(page).to have_link('Map')
+		end
+
+		it 'a map link leads to a page with the map' do
+			visit '/posts'
+			add_post("cool caption")
+			expect(page).to have_link('Map')
+			click_on 'Map'
+			expect(page).to_not have_content('Map')
+		end
+
+	end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,8 @@
 			<%= link_to tag.name, tag_path(tag) %>
 		<% end %>
 
+		 <%= link_to 'Map', post_map_path(post), :class => "btn btn-primary" %>
+
 		<h5 class="comment-count"><%= pluralize post.comments.count, 'comment' %></h5>
 
 		<% if post.user == current_user %>
@@ -31,13 +33,10 @@
 			<%= link_to "Leave a comment", new_post_comment_path(post) %>
 
 			<%= form_for [post, @comment] do |f| %>
-			
-			<%= f.label :comment %>
-			<%= f.text_field :comment %>
-
-			<%= f.submit 'Add', :class => 'create-comment-btn' %>
-
-		 	<% end %>
+				<%= f.label :comment %>
+				<%= f.text_field :comment %>
+				<%= f.submit 'Add', :class => 'create-comment-btn' %>
+			<% end %>
 
 			<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link" %>
 			<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link" %>

@@ -19,6 +19,10 @@
 .jumbotron {
 	background: image-url('photo-collage.jpg');
 	width: 100%;
+
+	.container {
+		background-color: white;
+	}
 }
 
 #header-buttons {	
@@ -28,4 +32,3 @@
 body {
 	background-color: #F7F7F7;
 }
-
