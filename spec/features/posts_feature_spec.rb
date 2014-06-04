@@ -62,7 +62,7 @@ describe 'Instagram Posts' do
 			login_as sroop
 		end
 
-		it 'a post has a link to a map' do
+		it 'a post has a link to a map if an address is input' do
 			visit '/posts'
 			click_on "Create a post"
 			attach_file 'Picture', Rails.root.join('public/images/image.jpg')
@@ -73,6 +73,16 @@ describe 'Instagram Posts' do
 			expect(page).to have_link('Map')
 		end
 
+		it 'a post does not have a map link if an address is not input' do
+			visit '/posts'
+			click_on "Create a post"
+			attach_file 'Picture', Rails.root.join('public/images/image.jpg')
+			fill_in "Caption", with: "nice picture"
+			click_on "Add"
+			expect(current_path).to eq('/posts')
+			expect(page).to_not have_link('Map')
+		end
+
 		it 'a map link leads to a page with the map' do
 			visit '/posts'
 			add_post("cool caption")
@@ -80,6 +90,7 @@ describe 'Instagram Posts' do
 			click_on 'Map'
 			expect(page).to_not have_content('Map')
 		end
+
 
 	end
 
