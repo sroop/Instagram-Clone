@@ -40,30 +40,30 @@
 				<%= f.submit 'Add', :class => 'create-comment-btn' %>
 			<% end %>
 
-			<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link" %>
-			<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link" %>
+			<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link btn btn-default" %>
+			<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link btn btn-default" %>
 
-		 	<h5 class="like-count"><%= pluralize post.likes.count, 'like' %></h5>
+		 	<h5 class="like-count glyphicon glyphicon-heart"><%= post.likes.count %></h5>
 
 
-			<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link" %>
-		 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link" %>
+			<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link btn btn-default" %>
+		 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link btn btn-default" %>
 
-		 	<h5 class="hate-count"><%= pluralize post.hates.count, 'hate' %></h5>
+		 	<h5 class="hate-count glyphicon glyphicon-thumbs-down"><%= post.hates.count %></h5>
 
 		<% end %>
 
-		<ul class="like-list">
-			<% post.likes.each do |like| %>
-				<li data-id="<%= like.id %>"><%= like.user.email %> likes this </li>
-			<% end %>
-		</ul>
+		<!-- <ul class="like-list"> -->
+			<%# post.likes.each do |like| %>
+				<!-- <li data-id="<%#= like.id %>"><%#= like.user.email %> likes this </li> -->
+			<%# end %>
+		<!-- </ul> -->
 
-		<ul class="hate-list">
-			<% post.hates.each do |hate| %>
-				<li data-id="<%= hate.id %>"><%= hate.user.email %> hates this </li>
-			<% end %>
-		</ul>
+		<!-- <ul class="hate-list"> -->
+			<%# post.hates.each do |hate| %>
+				<!-- <li data-id="<%#= hate.id %>"><%#= hate.user.email %> hates this </li> -->
+			<%# end %>
+		<!-- </ul> -->
 
 		<ul class="comment-list">
 			<% post.comments.each do |comment| %>

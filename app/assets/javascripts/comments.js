@@ -9,6 +9,7 @@ $(document).ready(function() {
 				var targetId = response.post_id;
 				var currentPost = $('.post-parent-container[data-id=' + targetId + ']');
 				currentPost.find('ul[class="comment-list"]').prepend(rendered);
+				currentPost.find('input[type=text]').val('');
 				// $('.comment-list').append(rendered);
 				currentPost.find('h5[class="comment-count"]').text(response.comment_count);
 		});

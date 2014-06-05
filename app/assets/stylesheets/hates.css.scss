@@ -1,9 +1,9 @@
 .hated {
-	.unhate-link {
+	.unhate-link.btn {
 		display: inline;
 	}
 
-	.hate-link {
+	.hate-link.btn {
 		display: none;
 	}
 }
@@ -11,6 +11,6 @@
 /* hate refers to an additional class that exists when the like button is displayed */
 
 
-.unhate-link {
+.unhate-link.btn {
 	display: none;
 }

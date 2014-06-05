@@ -1,9 +1,9 @@
 .liked {
-	.unlike-link {
+	.unlike-link.btn {
 		display: inline;
 	}
 
-	.like-link {
+	.like-link.btn {
 		display: none;
 	}
 }
@@ -11,6 +11,6 @@
 /* like refers to an additional class that exists when the like button is displayed */
 
 
-.unlike-link {
+.unlike-link.btn {
 	display: none;
 }
