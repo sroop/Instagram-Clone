@@ -17,13 +17,11 @@ class HatesController < ApplicationController
 	def destroy
 		@hate = current_user.hates.find_by(post_id: params[:post_id])
 		@post = Post.find(params[:post_id])
-		# @hate = current_user.hates.find(params[:id])
 		@hate.destroy! if @hate
 	rescue ActiveRecord::RecordNotFound
 		flash[:notice] = "Thats not yours to unhate!"
 	ensure
 		WebsocketRails[:hates].trigger 'deleted-hate', { hate_count: @post.hates.count, post_id: @post.id}
-		# render 'destroy', content_type: :json
 	end
 
 end

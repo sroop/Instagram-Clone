@@ -53,18 +53,6 @@
 
 		<% end %>
 
-		<!-- <ul class="like-list"> -->
-			<%# post.likes.each do |like| %>
-				<!-- <li data-id="<%#= like.id %>"><%#= like.user.email %> likes this </li> -->
-			<%# end %>
-		<!-- </ul> -->
-
-		<!-- <ul class="hate-list"> -->
-			<%# post.hates.each do |hate| %>
-				<!-- <li data-id="<%#= hate.id %>"><%#= hate.user.email %> hates this </li> -->
-			<%# end %>
-		<!-- </ul> -->
-
 		<ul class="comment-list">
 			<% post.comments.each do |comment| %>
 				<li> <%= comment.comment %> - <%= comment.user.email %> </li>

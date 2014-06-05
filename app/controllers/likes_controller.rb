@@ -10,13 +10,11 @@ class LikesController < ApplicationController
 		@like = @post.likes.new
 		@like.user = current_user
 		@like.save!
-		# redirect_to '/posts'
-		# render json: @like
-		WebsocketRails[:likes].trigger 'new-like', { like_count: @post.likes.count, post_id: @post.id}
-		# redirect_to '/posts'
-		# render 'create', content_type: :json
 	rescue ActiveRecord::RecordInvalid
 		render json: { error: 'Cannot like' }, status: 422
+	ensure
+		WebsocketRails[:likes].trigger 'new-like', { like_count: @post.likes.count, post_id: @post.id}
+		redirect_to '/posts'
 	end
 
 	def destroy
@@ -27,8 +25,7 @@ class LikesController < ApplicationController
 		flash[:notice] = "Thats not yours to unlike!"
 	ensure
 		WebsocketRails[:likes].trigger 'deleted-like', { like_count: @post.likes.count, post_id: @post.id}
-		# redirect_to '/posts'
-		# render 'destroy', content_type: :json
+		redirect_to '/posts'
 	end
 
 end
