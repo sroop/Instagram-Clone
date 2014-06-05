@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-	var connection = new WebSocketRails('localhost:3000/websocket')
-	var likesChannel = connection.subscribe('likes')
+	var connection = new WebSocketRails(window.location.host + '/websocket');
+	var likesChannel = connection.subscribe('likes');
 
 	$('.like-link').click(function(event) {
 		$.post(this.href);
@@ -24,6 +24,5 @@ $(document).ready(function() {
 		currentPost.find('h5.like-count').text(response.like_count);
 		$('.like-list li[data-id="'+ response.id + '"]').remove();
 		currentPost.toggleClass('liked');
-	});
-	
+	});	
 })

@@ -8,7 +8,8 @@ class HatesController < ApplicationController
 		# @hate = Hate.new(post: @post)  -this line also adds a post id to a hate, like the above two lines
 		@hate.user = current_user
 		@hate.save!
-		render 'create', content_type: :json
+		WebsocketRails[:hates].trigger 'new-hate', { hate_count: @post.hates.count, post_id: @post.id}
+		# render 'create', content_type: :json
 	rescue ActiveRecord::RecordInvalid
 		render json: { error: 'Cannot hate' }, status: 422
 	end
@@ -21,7 +22,8 @@ class HatesController < ApplicationController
 	rescue ActiveRecord::RecordNotFound
 		flash[:notice] = "Thats not yours to unhate!"
 	ensure
-		render 'destroy', content_type: :json
+		WebsocketRails[:hates].trigger 'deleted-hate', { hate_count: @post.hates.count, post_id: @post.id}
+		# render 'destroy', content_type: :json
 	end
 
 end
