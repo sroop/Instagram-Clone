@@ -13,8 +13,9 @@ class LikesController < ApplicationController
 		@like.save!
 		# redirect_to '/posts'
 		# render json: @like
-		# WebsocketRails[:likes].trigger 'new', { new_like_count: @post.likes.count, post_id: @post_id }
-		render 'create', content_type: :json
+		WebsocketRails[:likes].trigger 'new', { like_count: @post.likes.count, post_id: @post.id}
+		redirect_to '/posts'
+		# render 'create', content_type: :json
 	rescue ActiveRecord::RecordInvalid
 		render json: { error: 'Cannot like' }, status: 422
 	end
