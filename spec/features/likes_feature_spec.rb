@@ -19,7 +19,7 @@ describe 'Likes' do
 		visit '/posts'
 		add_post("Look at this leaf")
 		click_on 'Like'
-		# expect(page).to have_content("sroop@sunar.com likes this")
+		expect(page).to have_content("1")
 		expect(page).to_not have_content("Like")
 	end
 
