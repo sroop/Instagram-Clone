@@ -49,7 +49,7 @@
 			<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link btn btn-default" %>
 		 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link btn btn-default" %>
 
-		 	<h5 class="hate-count glyphicon glyphicon-thumbs-down"><%= post.hates.count %></h5>
+		 	<h5 class="hate-count">💩<%= post.hates.count %></h5>
 
 		<% end %>
 

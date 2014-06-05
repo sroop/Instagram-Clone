@@ -9,7 +9,7 @@ $(document).ready(function() {
 			var targetId = response.post_id;
 			var currentPost = $('.post-parent-container[data-id=' + targetId + ']');
 			// currentPost.find('ul.hate-list').prepend(rendered);
-			currentPost.find('h5.hate-count').text(response.hate_count);
+			currentPost.find('h5.hate-count').text('💩' + response.hate_count);
 
 			currentPost.toggleClass('hated');
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
 
 		$.ajax($(this).attr('href'), { type: 'delete', success: function(response) {
 			var currentPost = $('.post-parent-container[data-id=' + response.post_id + ']');
-			currentPost.find('h5.hate-count').text(response.hate_count);
+			currentPost.find('h5.hate-count').text('💩' + response.hate_count);
 
 			currentPost.toggleClass('hated');
 
