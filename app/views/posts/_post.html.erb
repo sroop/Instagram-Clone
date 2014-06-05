@@ -22,7 +22,7 @@
 		<% end %>
 
 		<% if !post.address.blank? %>
-		 <%= link_to 'Map', post_map_path(post), method: :get, :class => "btn btn-primary" %>
+		 <%= link_to 'Map', post_map_path(post), :class => "btn btn-primary" %>
 		 <% end %>
 
 		<h5 class="comment-count"><%= pluralize post.comments.count, 'comment' %></h5>
