@@ -2,7 +2,7 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
       <div class="container">
-        <h1>Hello, world!</h1>
+        <h1>Welcome to Bubblegram!</h1>
         <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
         <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
       </div>
@@ -12,22 +12,47 @@
   <li> {{ comment }} - {{ email }} </li>
 </template>
 
-<template id="ajax-render-likes">
 
-<li data-id="{{ id }}"> {{ email }} likes this </li>
+<%= link_to 'Create a post','#', :class => "btn btn-primary btn-lg", data: { toggle: 'modal', target: "#createModal"} %>
 
-</template>
 
-<template id="ajax-render-hates">
+<!-- Modal -->
 
-<li data-id="{{ id }}"> {{ email }} hates this </li>
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Create a post</h4>
+      </div>
+      <div class="modal-body">
+        
+<div class="container">
+<%= form_for @post, html: { multipart: true } do |f| %>
+  
+<div class="form-bits">
+  <%= f.label :picture %>
+  <%= f.file_field :picture %>
 
-</template>
+  <%= f.label :caption %>
+  <%= f.text_field :caption %>
 
-<%= link_to 'Create a post', new_post_path %>
+  <%= f.label :address %>
+  <%= f.text_field :address %>
 
-<div class="testing">
+  <%= f.label :tag_name, "Tags" %>
+  <%= f.text_field :tag_name %>
+
+  <%= f.submit 'Create' %>
 </div>
+ <% end %>
+ </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end of modal -->
 
 
 <div class="container">

@@ -3,7 +3,8 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Panel title</h3>
+    <h3 class="panel-title">posted <%="#{time_ago_in_words(post.created_at)}"%> ago by user 
+    <%= link_to post.user.email, profile_path(:post_id => post.id) %>  </h3>
   </div>
   <div class="panel-body">
   
@@ -25,37 +26,39 @@
 		 <%= link_to 'Map', post_map_path(post), :class => "btn btn-primary" %>
 		 <% end %>
 
+		<% if user_signed_in? %>
+
+			<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link btn btn-default" %>
+			<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link btn btn-default" %>
+
+			<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link btn btn-default" %>
+			<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link btn btn-default" %>
+
+		<% end %>
+
 		<h5 class="comment-count"><%= pluralize post.comments.count, 'comment' %></h5>
+		<div class="like-hate-icons">
+			<span class="poo">💩</span><h5 class="hate-count"><%= post.hates.count %></h5>
+			<span class="poo">❤</span><h5 class="like-count"><%= post.likes.count %></h5>
+		</div>
 
 		<% if post.user == current_user %>
 			<%= link_to 'Delete', post_path(post), method: :delete %>
 		<% end %>
 
 		<% if user_signed_in? %>
-			<%= link_to "Leave a comment", new_post_comment_path(post) %>
-
+		
 			<%= form_for [post, @comment] do |f| %>
 				<%= f.label :comment %>
 				<%= f.text_field :comment %>
 				<%= f.submit 'Add', :class => 'create-comment-btn' %>
 			<% end %>
 
-			<%= link_to 'Unlike', post_like_path(post, 1), method: :delete, :class => "unlike-link btn btn-default" %>
-			<%= link_to 'Like', post_likes_path(post), method: :post, :class => "like-link btn btn-default" %>
-
-		 	<h5 class="like-count glyphicon glyphicon-heart"><%= post.likes.count %></h5>
-
-
-			<%= link_to 'Unhate', post_hate_path(post, 1), method: :delete, :class => "unhate-link btn btn-default" %>
-		 	<%= link_to 'Hate', post_hates_path(post), method: :post, :class => "hate-link btn btn-default" %>
-
-		 	<h5 class="hate-count">💩<%= post.hates.count %></h5>
-
 		<% end %>
 
 		<ul class="comment-list">
 			<% post.comments.each do |comment| %>
-				<li> <%= comment.comment %> - <%= comment.user.email %> </li>
+				<li> <%= comment.comment %> <%="#{time_ago_in_words(comment.created_at).gsub('about','')}"%> ago<br><%= comment.user.email %> </li>
 			<% end %>
 		</ul>
 

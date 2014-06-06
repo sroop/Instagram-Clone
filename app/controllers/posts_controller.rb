@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 	def index
 		@posts = Post.all
 		@comment = Comment.new
+		@post = Post.new
+		# render :layout => false
 	end
 
 	def show
@@ -13,6 +15,7 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
+		
 	end
 
 	def create

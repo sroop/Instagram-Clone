@@ -1,6 +1,8 @@
+
+<div class="container">
 <%= form_for @post, html: { multipart: true } do |f| %>
 	
-
+<div class="form-bits">
 	<%= f.label :picture %>
 	<%= f.file_field :picture %>
 
@@ -13,6 +15,7 @@
 	<%= f.label :tag_name, "Tags" %>
 	<%= f.text_field :tag_name %>
 
-	<%= f.submit 'Add' %>
-
+	<%= f.submit 'Create' %>
+</div>
  <% end %>
+ </div>

@@ -1,10 +1,26 @@
-// Place all the styles related to the posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
 
 .uploaded-pic {
   max-width: 100%;
   margin-bottom: 20px;
   width: 100%;
+}
+
+
+.form-bits input {
+	display: block;
+}
+
+.panel.panel-default {
+	border-color: #ffffff;
+}
+
+.poo {
+	font-size: 60px;
+}
+
+.like-hate-icons {
+	.h5{
+		display: inline-block;
+	} 
 }

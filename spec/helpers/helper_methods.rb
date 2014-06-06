@@ -1,10 +1,10 @@
 def add_post(caption)
 	click_on "Create a post"
-	expect(current_path).to eq('/posts/new')
+	within('#createModal') {
 	attach_file 'Picture', Rails.root.join('public/images/image.jpg')
 	fill_in "Caption", with: caption 
 	fill_in "Address", with: "25 City Road, London"
-	click_on "Add"
+	click_on "Create" }
 end
 
 def add_comment(comment)
