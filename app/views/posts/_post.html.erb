@@ -4,7 +4,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">posted <%="#{time_ago_in_words(post.created_at)}"%> ago by user 
-    <%= link_to post.user.email, profile_path(:post_id => post.id) %>  </h3>
+    <% if post.user %>
+    	<%= link_to post.user.email, profile_path(post.user) %>  </h3>
+    <% end %>
   </div>
   <div class="panel-body">
   

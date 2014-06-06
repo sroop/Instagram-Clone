@@ -13,9 +13,12 @@ Rails.application.routes.draw do
   end
 
   resources :tags
+  resources :relationships
   
-  resource :profile, only: [:show]
-  
+  get 'users/:user_id/profile', to: 'profiles#show', as: 'profile'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -10,6 +10,7 @@ class HatesController < ApplicationController
 		@hate.save!
 		WebsocketRails[:hates].trigger 'new-hate', { hate_count: @post.hates.count, post_id: @post.id}
 		# render 'create', content_type: :json
+		render nothing: true
 	rescue ActiveRecord::RecordInvalid
 		render json: { error: 'Cannot hate' }, status: 422
 	end
@@ -21,6 +22,7 @@ class HatesController < ApplicationController
 	rescue ActiveRecord::RecordNotFound
 		flash[:notice] = "Thats not yours to unhate!"
 	ensure
+		render nothing: true
 		WebsocketRails[:hates].trigger 'deleted-hate', { hate_count: @post.hates.count, post_id: @post.id}
 	end
 
