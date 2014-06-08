@@ -11,4 +11,23 @@ describe Relationship do
     	@relationship.save!
   	end
 
+  	it 'should respond to follower' do
+  		@relationship.save
+  		expect(@relationship).to respond_to(:follower)
+  	end
+
+  	it 'should respond to followed' do
+  		@relationship.save
+  		expect(@relationship).to respond_to(:followed)
+  	end
+
+  	it 'should have the right follower' do
+  		@relationship.save
+  		expect(@relationship.follower).to eq(@follower)
+  	end
+
+  	it 'should have the right following' do
+  		expect(@relationship.followed).to eq(@followed)
+  	end
+
 end
