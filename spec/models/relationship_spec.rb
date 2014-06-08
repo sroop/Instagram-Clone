@@ -10,4 +10,5 @@ describe Relationship do
 	it "should create a new instance given valid attributes" do
     	@relationship.save!
   	end
+
 end
