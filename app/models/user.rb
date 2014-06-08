@@ -12,4 +12,11 @@ class User < ActiveRecord::Base
         has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy
                      
 		    has_many :following, :through => :relationships, :source => :followed
+
+    def follow!(followed)
+      relationships.create(followed_id: followed.id)
+    end
+
+    # def follow?(user)
+    # end
 end

@@ -16,4 +16,9 @@ describe "relationships" do
       # expect(@follower).to respond_to(:following)
     end
   
+    it "should follow another user" do
+      @follower.follow!(@followed)
+      expect(@follower.following).to include(@followed)
+    end
+
 end
