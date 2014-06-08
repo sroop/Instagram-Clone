@@ -8,7 +8,12 @@ describe "relationships" do
 	end
 
     it "should have a relationships method" do
-      @follower.should respond_to(:relationships)
+      expect(@follower).to respond_to(:relationships)
+    end
+
+    it "should have a following method" do
+    	expect(@follower.following).to be_true
+      # expect(@follower).to respond_to(:following)
     end
   
 end

@@ -30,14 +30,18 @@ describe Relationship do
   		expect(@relationship.followed).to eq(@followed)
   	end
 
-  	it "should require a follower_id" do
-      @relationship.follower_id = nil
-      expect(@relationship).to_not be_valid
-    end
+	context 'validations' do
 
-    it "should require a followed_id" do
-      @relationship.followed_id = nil
-      expect(@relationship).to_not be_valid
-    end
+	  	it "should require a follower_id" do
+	      @relationship.follower_id = nil
+	      expect(@relationship).to_not be_valid
+	    end
+
+	    it "should require a followed_id" do
+	      @relationship.followed_id = nil
+	      expect(@relationship).to_not be_valid
+	    end
+
+	end
 
 end
