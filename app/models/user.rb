@@ -14,9 +14,13 @@ class User < ActiveRecord::Base
 		    has_many :following, :through => :relationships, :source => :followed
 
     def follow!(followed)
-      relationships.create(followed_id: followed.id)
+      self.relationships.create(followed_id: followed.id)
     end
 
     # def follow?(user)
     # end
+
+    def unfollow!(followed)
+      self.relationships.find_by(followed_id: followed.id).destroy
+    end
 end

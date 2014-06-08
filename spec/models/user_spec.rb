@@ -21,4 +21,11 @@ describe "relationships" do
       expect(@follower.following).to include(@followed)
     end
 
+    it "should unfollow a user" do
+      @follower.follow!(@followed)
+      expect(@follower.following).to include(@followed)
+      @follower.unfollow!(@followed)
+      expect(@follower.following).to be_empty
+    end
+
 end
